@@ -15,12 +15,6 @@ const Hero: React.FC = () => {
         <p className="text-lg md:text-2xl mb-8 max-w-3xl mx-auto">
           Con un trayecto informático único, diseñado por Marcelo Peralta para llevarte al siguiente nivel profesional.
         </p>
-        <a 
-          href="#" 
-          className="bg-custom-orange text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-orange-500 transition duration-300"
-        >
-          Ver más información de los módulos
-        </a>
       </div>
     </section>
   );

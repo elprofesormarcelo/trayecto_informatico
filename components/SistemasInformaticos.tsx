@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import useIntersectionObserver from './useIntersectionObserver';
-import { HardwareIcon, SoftwareIcon, OSIcon, NetworkIcon, SimpleCheckIcon, ArrowLeftIcon } from './icons/SocialIcons';
+import { HardwareIcon, SoftwareIcon, OSIcon, NetworkIcon, SimpleCheckIcon, ArrowLeftIcon, ChevronDownIcon } from './icons/SocialIcons';
 
 const topics = [
   {
@@ -35,7 +35,11 @@ const otherModules = [
 const SistemasInformaticos: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
-  const [activeTab, setActiveTab] = useState(0);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(0);
+
+  const toggleAccordion = (index: number) => {
+    setOpenAccordion(openAccordion === index ? null : index);
+  };
 
   return (
     <section 
@@ -62,36 +66,39 @@ const SistemasInformaticos: React.FC = () => {
           </a>
         </div>
         
-        {/* Tab Navigation */}
+        {/* Accordion Section */}
         <div className="max-w-4xl mx-auto mb-20">
           <h3 className="text-3xl font-extrabold text-custom-dark text-center mb-8">Temas Clave del Módulo</h3>
-          <div className="flex flex-wrap justify-center border-b border-gray-200">
+          <div className="space-y-3">
             {topics.map((topic, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(index)}
-                className={`py-3 px-4 md:py-4 md:px-6 font-semibold text-base md:text-lg transition-colors duration-300 focus:outline-none ${
-                  activeTab === index
-                    ? 'border-b-4 border-custom-orange text-custom-orange'
-                    : 'text-gray-500 hover:text-custom-dark'
-                }`}
-              >
-                {topic.title}
-              </button>
+              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex justify-between items-center p-5 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-opacity-50 transition-colors duration-300"
+                  aria-expanded={openAccordion === index}
+                  aria-controls={`accordion-content-${index}`}
+                >
+                  <div className="flex items-center text-left">
+                     <div className="w-10 h-10 text-custom-orange mr-4 flex-shrink-0">
+                        {topic.icon}
+                     </div>
+                     <span className="text-xl font-bold text-custom-dark">{topic.title}</span>
+                  </div>
+                  <span className={`transform transition-transform duration-300 text-custom-orange ${openAccordion === index ? 'rotate-180' : 'rotate-0'}`}>
+                    <ChevronDownIcon />
+                  </span>
+                </button>
+                <div
+                  id={`accordion-content-${index}`}
+                  role="region"
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${openAccordion === index ? 'max-h-96' : 'max-h-0'}`}
+                >
+                  <div className="p-6 border-t border-gray-200 bg-white">
+                    <p className="text-gray-700 text-lg">{topic.description}</p>
+                  </div>
+                </div>
+              </div>
             ))}
-          </div>
-          
-          {/* Tab Content */}
-          <div className="mt-8 p-6 md:p-10 bg-gray-50 rounded-xl shadow-inner min-h-[150px]">
-            <div className="flex flex-col md:flex-row items-center text-center md:text-left">
-              <div className="w-16 h-16 md:w-20 md:h-20 text-custom-orange mr-0 md:mr-8 mb-4 md:mb-0 flex-shrink-0">
-                {topics[activeTab].icon}
-              </div>
-              <div>
-                <h4 className="text-2xl font-bold text-custom-dark mb-2">{topics[activeTab].title}</h4>
-                <p className="text-gray-700 text-lg">{topics[activeTab].description}</p>
-              </div>
-            </div>
           </div>
         </div>
 
