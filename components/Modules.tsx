@@ -43,13 +43,13 @@ const Modules: React.FC = () => {
   return (
     <section 
       ref={sectionRef}
-      className={`bg-gray-50 py-20 md:py-32 transition-all duration-1000 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className="bg-gray-50 py-20 md:py-32"
       id="modules"
     >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           <h2 className="text-4xl md:text-5xl font-extrabold text-custom-dark leading-tight">
             Módulos del Curso
           </h2>
@@ -62,7 +62,10 @@ const Modules: React.FC = () => {
           {modulesData.map((module, index) => (
             <a href={module.href} key={index} className="block h-full">
               <div 
-                className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300 ease-in-out border-t-4 border-custom-orange h-full"
+                className={`bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 border-t-4 border-custom-orange h-full transition-all duration-500 ease-out ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                }`}
+                style={{ transitionDelay: `${200 + index * 150}ms` }}
               >
                 <div className="bg-custom-orange bg-opacity-10 rounded-full p-4 mb-6">
                   <div className="w-8 h-8 text-custom-orange">

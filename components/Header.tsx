@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { PhoneIcon, UserIcon, FacebookIcon, TwitterIcon, MailIcon } from './icons/SocialIcons';
+import { PhoneIcon, UserIcon, FacebookIcon, InstagramIcon, LinkedInIcon, MailIcon } from './icons/SocialIcons';
 
 const Header: React.FC = () => {
   return (
@@ -17,14 +16,11 @@ const Header: React.FC = () => {
               <UserIcon />
               <span>Area Alumnos</span>
             </a>
-             <a href="#" className="hidden md:flex items-center space-x-2 hover:text-gray-200">
-              <UserIcon />
-              <span>Intranet</span>
-            </a>
           </div>
           <div className="flex items-center space-x-4">
             <a href="#" className="hover:text-gray-200"><FacebookIcon /></a>
-            <a href="#" className="hover:text-gray-200"><TwitterIcon /></a>
+            <a href="#" className="hover:text-gray-200"><InstagramIcon /></a>
+            <a href="#" className="hover:text-gray-200"><LinkedInIcon /></a>
             <a href="#" className="hover:text-gray-200"><MailIcon /></a>
           </div>
         </div>
